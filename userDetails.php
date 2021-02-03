@@ -1,10 +1,44 @@
+<style>
+.pagination {   
+    display: inline-block;   
+}   
+.pagination a {   
+    font-weight:bold;   
+    font-size:18px;   
+    color: black;   
+    float: left;   
+    padding: 8px 16px;   
+    text-decoration: none;   
+    border:1px solid black;   
+}   
+.pagination a.active {   
+        background-color: pink;   
+}   
+.pagination a:hover:not(.active) {   
+    background-color: skyblue;   
+}
+</style>
 <?php require_once "dbconn.php";
 include "./include/header.php";
 ?>
 <?php
 $status = $flag1 = $flag2= false;
 
-$sql = "SELECT t.id,t.status, u.name, u.email, u.address, u.mobile, u.dob, u.lang, u.gender FROM temp_user t, user u WHERE t.id = u.user_id ";
+        $per_page_record = 4;  // Number of entries to show in a page.   
+        // Look for a GET variable page if not found default is 1.        
+        if (isset($_GET["page"])) {    
+            $page  = $_GET["page"];    
+        }    
+        else {    
+          $page=1;    
+        }    
+    
+        $start_from = ($page-1) * $per_page_record;     
+    
+        // $query = "SELECT * FROM user LIMIT $start_from, $per_page_record";     
+        // $rs_result = mysqli_query ($conn, $query); 
+
+$sql = "SELECT t.id,t.status, u.name, u.email, u.address, u.mobile, u.dob, u.lang, u.gender FROM temp_user t, user u WHERE t.id = u.user_id LIMIT $start_from, $per_page_record";
 
 $result = $conn->query($sql);
 
@@ -22,7 +56,7 @@ $result = $conn->query($sql);
         </a>
 </p>
          
-  <table class="table table-bordered">
+  <table class="table table-striped table-condensed table-bordered">
     <thead>
       <tr>
         
@@ -86,7 +120,7 @@ $result = $conn->query($sql);
         <?php
         }
         ?>
-        <a href="deleteuser.php?id=<?php echo $row['id'];?>">
+        <a href="deleteuser.php?id=<?php echo $row['id'];?>" onclick="return confirm('Are you sure?')">
         <button type="button" class="btn btn-danger btn-sm">Delete</button>
         </a>
         </td>
@@ -96,13 +130,49 @@ $result = $conn->query($sql);
 } else {
   echo "0 results";
 }
-$conn->close();
+
   ?>
     </tbody>
   </table>
+  <div class="pagination">
+
+  <?php
+    $query = "SELECT COUNT(*) FROM user";     
+    $rs_result = mysqli_query($conn, $query);     
+    $row = mysqli_fetch_row($rs_result);     
+    $total_records = $row[0];
+    $total_pages = ceil($total_records / $per_page_record);     
+    $pagLink = "";
+    if($page>=2){   
+      echo "<a href='userDetails.php?page=".($page-1)."'>  Prev </a>";   
+  }       
+             
+  for ($i=1; $i<=$total_pages; $i++) {   
+    if ($i == $page) {   
+        $pagLink .= "<a class = 'active' href='userDetails.php?page="  
+                                          .$i."'>".$i." </a>";   
+    }               
+    else  {   
+        $pagLink .= "<a href='userDetails.php?page=".$i."'>   
+                                          ".$i." </a>";     
+    }   
+  }    
+  echo $pagLink;   
+
+  if($page<$total_pages){   
+      echo "<a href='userDetails.php?page=".($page+1)."'>  Next </a>";   
+  }   
+
+      
+  ?>
+           
+
+</div>
+
   </form>
 </div>
 </section>
 <?php
+$conn->close();
 include "./include/footer.php";
 ?>
