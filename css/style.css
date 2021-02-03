@@ -1,0 +1,22 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.phpcoding{
+  width: auto;
+  margin:0 auto; 
+  background: rgb(243, 243, 243); 
+}
+.myheader,.myfooter{
+    background:#444;
+    color:#ea9595;
+    text-align:center;
+    padding:10px;   
+}
+.maincontent{
+    height:auto;
+    padding:10px; 
+    
+}
+.myheader h2,.myfooter h3{
+    margin: 0;
+}
