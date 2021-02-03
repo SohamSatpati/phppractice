@@ -11,6 +11,9 @@ $flag = false;
 
 $id = $_GET['id'];
 
+if(isset($_POST['back'])){
+  echo "<script language=Javascript>document.location.href='userDetails.php'</script>";
+}
 
 if(isset($_POST['update'])){
 
@@ -95,6 +98,7 @@ $result = $conn->query($sql);
 
 ?>
 <script type="text/javascript" src="./js/myscript.js">
+
 </script>
 
 <section class="myheader">
@@ -295,7 +299,7 @@ if ($result->num_rows > 0) {
            <input type="submit" class="btn btn-primary btn-lg" value="Update" name = "update"/>
            </div>
            <div class="col-sm-3">
-           <input type="submit" class="btn btn-dark btn-lg" value="Back" name = "back"/>
+           <button type="submit" class="btn btn-dark btn-lg" value="Back" name = "back" >Back</button>
            </div>
            <div class="col-sm-3">
            </div>

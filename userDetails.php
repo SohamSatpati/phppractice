@@ -29,6 +29,9 @@ $status = $flag1 = $flag2= false;
 $sql = "SELECT * FROM user";
 $result = $conn->query($sql);
 
+if(isset($_POST['add'])){
+  echo "<script language=Javascript>document.location.href='index.php'</script>";
+}
 
 ?>
 <section class="myheader">
@@ -36,7 +39,8 @@ $result = $conn->query($sql);
 </section>
 <section class="maincontent">
 <div class="container">
-<form>          
+<form method="post"> 
+<button type="submit" class="btn btn-light" name="add" value="add">Add</button>         
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -86,7 +90,7 @@ $result = $conn->query($sql);
 
         <button type="button" class="btn btn-warning btn-sm">Change</button>
         <button type="button" class="btn btn-success btn-sm">Success</button>
-        
+
         <a href="deleteuser.php?id=<?php echo $row['id'];?>">
         <button type="button" class="btn btn-danger btn-sm">Delete</button>
         </a>
