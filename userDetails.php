@@ -1,37 +1,12 @@
 <?php require_once "dbconn.php";
 include "./include/header.php";
 ?>
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>User Details</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  
-</head>
-<body>
-<div class="jumbotron">
-  <div class="container">
-  <h1 class="display-4">User Details</h1>      
-  <p class="text-lg-left">Left aligned text on viewports sized LG (large) or wider.</p>
-  </div>
-</div>
--->
 <?php
 $status = $flag1 = $flag2= false;
 
+$sql = "SELECT t.id,t.status, u.name, u.email, u.address, u.mobile, u.dob, u.lang, u.gender FROM temp_user t, user u WHERE t.id = u.user_id ";
 
-$sql = "SELECT * FROM user";
 $result = $conn->query($sql);
-
-if(isset($_POST['add'])){
-  echo "<script language=Javascript>document.location.href='index.php'</script>";
-}
 
 ?>
 <section class="myheader">
@@ -39,8 +14,14 @@ if(isset($_POST['add'])){
 </section>
 <section class="maincontent">
 <div class="container">
-<form method="post"> 
-<button type="submit" class="btn btn-light" name="add" value="add">Add</button>         
+<form method="post">
+
+<p class="text-right"> 
+<a href="index.php" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-plus"> Add</span>
+        </a>
+</p>
+         
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -80,17 +61,31 @@ if(isset($_POST['add'])){
         }
       }
         ?>
-         </td>
-        <td><?php echo $row["gender"];?></td>
-        <td>status goes here</td>
+      </td>
+      <td><?php echo $row["gender"];?></td>
+      <td><?php echo $row["status"];?></td>
+
         <td>
         <a href="updateuser.php?id=<?php echo $row['id'];?>">
         <button type="button" class="btn btn-primary btn-sm" formaction="">Update</button>
         </a>
 
-        <button type="button" class="btn btn-warning btn-sm">Change</button>
-        <button type="button" class="btn btn-success btn-sm">Success</button>
-
+       <?php
+       if($row["status"] == 1){
+       ?>
+       <a href="statuschange.php?id=<?php echo $row['id'];?>&status=<?php echo $row["status"];?>">
+        <button type="button" class="btn btn-success btn-sm">Active</button>
+        </a>
+        <?php
+        }
+        if($row["status"] == 0){
+        ?>
+        <a href="statuschange.php?id=<?php echo $row['id'];?>&status=<?php echo $row["status"];?>">
+        <button type="button" class="btn btn-warning btn-sm">Inactive</button>
+        </a>
+        <?php
+        }
+        ?>
         <a href="deleteuser.php?id=<?php echo $row['id'];?>">
         <button type="button" class="btn btn-danger btn-sm">Delete</button>
         </a>
