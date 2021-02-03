@@ -23,7 +23,7 @@ include "./include/header.php";
 </div>
 -->
 <?php
-$flag1 = $flag2= false;
+$status = $flag1 = $flag2= false;
 
 
 $sql = "SELECT * FROM user";
@@ -48,6 +48,7 @@ $result = $conn->query($sql);
         <th>D.O.B</th>
         <th>Language</th>
         <th>Gender</th>
+        <th>Status</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -77,13 +78,15 @@ $result = $conn->query($sql);
         ?>
          </td>
         <td><?php echo $row["gender"];?></td>
-        
-        <td id="action">
+        <td>status goes here</td>
+        <td>
         <a href="updateuser.php?id=<?php echo $row['id'];?>">
         <button type="button" class="btn btn-primary btn-sm" formaction="">Update</button>
         </a>
+
         <button type="button" class="btn btn-warning btn-sm">Change</button>
-        <br/>
+        <button type="button" class="btn btn-success btn-sm">Success</button>
+        
         <a href="deleteuser.php?id=<?php echo $row['id'];?>">
         <button type="button" class="btn btn-danger btn-sm">Delete</button>
         </a>

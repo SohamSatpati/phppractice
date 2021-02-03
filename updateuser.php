@@ -154,15 +154,12 @@ if ($result->num_rows > 0) {
 
     <div class="col-sm-6">
     <?php
-    if(!empty($row["lang"])){//echo "Hiiiii";
+    if(!empty($row["lang"])){
     $arr = json_decode($row["lang"], TRUE);
     }else{
       $arr = array();
     }
-    // foreach($arr as $key=>$value){
-    //   echo $value.",";
-    // }
-    //echo count($arr);
+ 
     if(count($arr) > 0){
     ?>
           <div class="form-check form-check-inline">
@@ -294,8 +291,11 @@ if ($result->num_rows > 0) {
           <div class="row">
            <div class="col-sm-3">
            </div>
-           <div class="col-sm-6">
+           <div class="col-sm-3">
            <input type="submit" class="btn btn-primary btn-lg" value="Update" name = "update"/>
+           </div>
+           <div class="col-sm-3">
+           <input type="submit" class="btn btn-dark btn-lg" value="Back" name = "back"/>
            </div>
            <div class="col-sm-3">
            </div>
