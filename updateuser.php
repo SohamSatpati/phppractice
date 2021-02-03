@@ -98,7 +98,7 @@ $result = $conn->query($sql);
 </script>
 
 <section class="myheader">
-<h2><?php echo "Update Form";?></h2>
+<h2><?php echo "My Update Form";?></h2>
 </section>
 <section class="maincontent">
 <div class="container">
