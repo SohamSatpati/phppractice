@@ -11,9 +11,6 @@ $flag = false;
 
 $id = $_GET['id'];
 
-if(isset($_POST['back'])){
-  echo "<script language=Javascript>document.location.href='userDetails.php'</script>";
-}
 
 if(isset($_POST['update'])){
 
@@ -98,7 +95,6 @@ $result = $conn->query($sql);
 
 ?>
 <script type="text/javascript" src="./js/myscript.js">
-
 </script>
 
 <section class="myheader">
@@ -158,12 +154,15 @@ if ($result->num_rows > 0) {
 
     <div class="col-sm-6">
     <?php
-    if(!empty($row["lang"])){
+    if(!empty($row["lang"])){//echo "Hiiiii";
     $arr = json_decode($row["lang"], TRUE);
     }else{
       $arr = array();
     }
- 
+    // foreach($arr as $key=>$value){
+    //   echo $value.",";
+    // }
+    //echo count($arr);
     if(count($arr) > 0){
     ?>
           <div class="form-check form-check-inline">
@@ -295,11 +294,8 @@ if ($result->num_rows > 0) {
           <div class="row">
            <div class="col-sm-3">
            </div>
-           <div class="col-sm-3">
+           <div class="col-sm-6">
            <input type="submit" class="btn btn-primary btn-lg" value="Update" name = "update"/>
-           </div>
-           <div class="col-sm-3">
-           <button type="submit" class="btn btn-dark btn-lg" value="Back" name = "back" >Back</button>
            </div>
            <div class="col-sm-3">
            </div>
