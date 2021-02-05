@@ -11,6 +11,9 @@ $flag = false;
 
 $id = $_GET['id'];
 
+if(isset($_POST['back'])){
+  header("Location: userDetails.php");
+}
 
 if(isset($_POST['update'])){
 
@@ -296,6 +299,7 @@ if ($result->num_rows > 0) {
            </div>
            <div class="col-sm-6">
            <input type="submit" class="btn btn-primary btn-lg" value="Update" name = "update"/>
+           <button type="submit" class="btn btn-dark btn-lg" name="back">Back</button>
            </div>
            <div class="col-sm-3">
            </div>
