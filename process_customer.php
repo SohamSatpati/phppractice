@@ -7,7 +7,7 @@ $str_arr = unserialize(urldecode($_GET['str']));
 // echo "</pre>";
 // echo "<br/>";
 
-$name = $str_arr['fname']." ".$str_arr['mname']." ".$str_arr['lname'];
+$name = ucfirst($str_arr['fname'])." ".ucfirst($str_arr['mname'])." ".ucfirst($str_arr['lname']);
 
 //echo $name. "<br/>";
 $email = $str_arr['email'];

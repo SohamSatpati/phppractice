@@ -8,7 +8,7 @@ $fname = $mname = $lname = $email = $pass = $repass = $addr = $mobile = $dob = $
 
 $flag = false;
 
-if($_SERVER['REQUEST_METHOD'] == "POST"){
+if(isset($_POST['submit'])){
 
     if(empty($_POST['fname']) ){
         $errfname = "<span style = 'color:red'>*First Name is Required!</span>";
@@ -142,13 +142,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         <div class="row">
     <div class="col">
       
-      <input type="text" class="form-control" name = "fname" id = "fname" placeholder="First name"><?php echo $errfname;?>
+      <input type="text" class="form-control" name = "fname" id = "fname" placeholder="First name" value = "<?php echo $fname;?>"><?php echo $errfname;?>
     </div>
     <div class="col">
-      <input type="text" class="form-control" name = "mname" placeholder="Middle name">
+      <input type="text" class="form-control" name = "mname" placeholder="Middle name" value = "<?php echo $mname;?>">
     </div>
     <div class="col">
-    <input type="text" class="form-control" name = "lname" placeholder="Last name">
+    <input type="text" class="form-control" name = "lname" placeholder="Last name" value = "<?php echo $lname;?>">
     <?php echo $errlname;?>
     </div>
         </div>
@@ -156,7 +156,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
           <div class="form-group">
             <label for="exampleFormControlInput1">Email address</label>
 
-            <input type="text" class="form-control" id="email" placeholder="name@example.com" autocomplete="on" name="email">
+            <input type="text" class="form-control" id="email" placeholder="name@example.com" autocomplete="on" name="email" value = "<?php echo $email;?>">
             <?php echo $erremail;?>
           </div>
 
@@ -164,32 +164,33 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         <div class="row">
     <div class="col">
     <label for="exampleFormControlInput1">Password</label>
-      <input type="password" name = "pass" class="form-control" placeholder="Enter Password"><?php echo $errpass;?>
+      <input type="password" name = "pass" class="form-control" placeholder="Enter Password" value = "<?php?>"><?php echo $errpass;?>
     </div>
     <div class="col">
     <label for="exampleFormControlInput1">Retype password</label>
-      <input type="password" name = "repass" class="form-control" placeholder="Retype password"><?php echo $err_repass;?>
+      <input type="password" name = "repass" class="form-control" placeholder="Retype password" value = "<?php echo $repass;?>"><?php echo $err_repass;?>
     </div>
     </div>
   </div> 
           <div class="form-group">
             <label for="textarea">Address</label>
-            <textarea class="form-control" id="address" rows="3" name="address" placeholder="Enter your Home address"></textarea><?php echo $erraddr;?>
+            <textarea class="form-control" id="address" rows="3" name="address" placeholder="Enter your Home address"><?php echo $addr;?></textarea><?php echo $erraddr;?>
           </div>
 
           <div class="form-group">
         <div class="row">    
     <div class="col">
     <label for="exampleFormControlInput1">Mobile</label>
-      <input type="tel" class="form-control" name = "mobile" placeholder="123-4567-890" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}"><?php echo $errmobile;?><small>Format: 123-4567-890</small>
+      <input type="tel" class="form-control" name = "mobile" placeholder="123-4567-890" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" value = "<?php echo $mobile;?>"><?php echo $errmobile;?><small>Format: 123-4567-890</small>
     </div>
+
     <div class="col">
     <label for="exampleFormControlInput1">Date of birth</label>
     <i class="bi bi-calendar-date"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
   <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
   <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
 </svg></i>
-    <input data-date-format="dd/mm/yyyy" id="datepicker" class="form-control" name = "datepicker" placeholder="Choose Date of Birth" autocomplete = "off">
+    <input data-date-format="dd/mm/yyyy" id="datepicker" class="form-control" name = "datepicker" placeholder="Choose Date of Birth" autocomplete = "off" value = "<?php echo $dob;?>">
     <?php echo $errdob;?>
     </div>
         </div>
@@ -216,11 +217,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <label for="exampleFormControlInput1">Language Known</label>
     </div>
     <div class="col-sm-6">
-    
-          <div class="form-check form-check-inline">
+
+    <?php 
+    if(!isset($_POST['lang']) || isset($_POST['clear'])){
+     
+    ?>
+    <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="Checkbox1" name="lang[]" value="C">
             <label class="form-check-label" for="inlineCheckbox1">C</label>
           </div>
+
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="Checkbox1" name="lang[]" value="Cpp">
             <label class="form-check-label" for="inlineCheckbox2">Cpp</label>
@@ -238,6 +244,35 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             <label class="form-check-label" for="inlineCheckbox2">PHP</label>
           </div>
     </div>
+    <?php
+    }
+    if(isset($_POST['lang'])){
+    
+    ?>
+    <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="Checkbox1" name="lang[]" value="C" <?php if(in_array("C", $lang)) {?> checked="checked"<?php } ?>>
+            <label class="form-check-label" for="inlineCheckbox1">C</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="Checkbox1" name="lang[]" value="Cpp" <?php if(in_array("Cpp", $lang)) {?> checked="checked"<?php } ?>>
+            <label class="form-check-label" for="inlineCheckbox2">Cpp</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="Checkbox1" name="lang[]" value="Java" <?php if(in_array("Java", $lang)) {?> checked="checked"<?php } ?>>
+            <label class="form-check-label" for="inlineCheckbox2">Java</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="Checkbox1" name="lang[]" value="Python" <?php if(in_array("Python", $lang)) {?> checked="checked"<?php } ?>>
+            <label class="form-check-label" for="inlineCheckbox2">Python</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="Checkbox1" name="lang[]" value="PHP" <?php if(in_array("PHP", $lang)) {?> checked="checked"<?php } ?>>
+            <label class="form-check-label" for="inlineCheckbox2">PHP</label>
+          </div>
+          <?php
+    }
+          ?>
     <div class="col-sm-3">
     <label class="form-check-label" for="inlineCheckbox2"><?php echo $errlang;?></label>
     </div>
@@ -271,7 +306,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
           <div class="form-group">
           <input type="submit" class="btn btn-primary btn-lg" value="Submit" name = "submit"/>
          <!-- <button type="submit" class="btn btn-primary" onclick="formSubmit()">Submit</button>-->
-          <input type="reset" class="btn btn-secondary btn-lg" value="Clear"/>
+          <button type="submit" class="btn btn-secondary btn-lg" value="Clear" name="clear">Clear</button>
           
         </div>
          <br/>
