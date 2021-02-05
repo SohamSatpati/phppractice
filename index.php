@@ -8,6 +8,10 @@ $fname = $mname = $lname = $email = $pass = $repass = $addr = $mobile = $dob = $
 
 $flag = false;
 
+if(isset($_POST['clear'])){
+  echo "clear pressed";
+}
+
 if(isset($_POST['submit'])){
 
     if(empty($_POST['fname']) ){
@@ -216,13 +220,14 @@ if(isset($_POST['submit'])){
     <div class="col-sm-3">
     <label for="exampleFormControlInput1">Language Known</label>
     </div>
-    <div class="col-sm-6">
 
+    <div class="col-sm-6">
     <?php 
-    if(!isset($_POST['lang']) || isset($_POST['clear'])){
-     
+    if(empty($_POST['lang'])){
+    
+     $lang = array();
     ?>
-    <div class="form-check form-check-inline">
+          <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="Checkbox1" name="lang[]" value="C">
             <label class="form-check-label" for="inlineCheckbox1">C</label>
           </div>
@@ -243,10 +248,10 @@ if(isset($_POST['submit'])){
             <input class="form-check-input" type="checkbox" id="Checkbox1" name="lang[]" value="PHP">
             <label class="form-check-label" for="inlineCheckbox2">PHP</label>
           </div>
-    </div>
+    
     <?php
     }
-    if(isset($_POST['lang'])){
+    if(!empty($_POST['lang'])){
     
     ?>
     <div class="form-check form-check-inline">
@@ -273,6 +278,7 @@ if(isset($_POST['submit'])){
           <?php
     }
           ?>
+          </div>
     <div class="col-sm-3">
     <label class="form-check-label" for="inlineCheckbox2"><?php echo $errlang;?></label>
     </div>
@@ -305,8 +311,10 @@ if(isset($_POST['submit'])){
           <br/>
           <div class="form-group">
           <input type="submit" class="btn btn-primary btn-lg" value="Submit" name = "submit"/>
-         <!-- <button type="submit" class="btn btn-primary" onclick="formSubmit()">Submit</button>-->
-          <button type="submit" class="btn btn-secondary btn-lg" value="Clear" name="clear">Clear</button>
+         <!-- <button type="submit" class="btn btn-primary" onclick="formSubmit()">Submit</button>
+          <button type="submit" class="btn btn-secondary btn-lg" value="Clear" name="clear">Clear</button> -->
+
+         <input type="reset" class="btn btn-secondary btn-lg" value="Clear" name = "clear"/> 
           
         </div>
          <br/>
