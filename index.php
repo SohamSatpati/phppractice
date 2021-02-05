@@ -8,15 +8,14 @@ $fname = $mname = $lname = $email = $pass = $repass = $addr = $mobile = $dob = $
 
 $flag = false;
 
-if(isset($_POST['clear'])){
-  echo "clear pressed";
-}
+// if(isset($_POST['clear'])){
+//   echo "clear pressed";
+// }
 
 if(isset($_POST['submit'])){
 
     if(empty($_POST['fname']) ){
-        $errfname = "<span style = 'color:red'>*First Name is Required!</span>";
-       
+      $errfname = dispInpErrorMsg("First Name is Required");
         }
         else {
             $fname = validation($_POST['fname']);
@@ -25,7 +24,9 @@ if(isset($_POST['submit'])){
         $mname = validation($_POST['mname']);
 
         if(empty($_POST['lname'])){
-            $errlname = "<span style = 'color:red'>*Last Name is Required!</span>";
+
+          $errlname = dispInpErrorMsg("Last Name is Required");
+            
            
             }
             else {
@@ -33,10 +34,13 @@ if(isset($_POST['submit'])){
                 
             }
             if(empty($_POST['email'])){
-                $erremail = "<span style = 'color:red'>*Email is Required!</span>";
+              
+              $erremail = dispInpErrorMsg("Email is Required");
+               
                }
                else if(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
-                $erremail = "<span style = 'color:red'>*Invalid Email format!</span>"; 
+                $erremail = dispInpErrorMsg("Invalid Email format");
+               
               } 
               else{
                $email = validation($_POST['email']); 
@@ -48,7 +52,8 @@ if(isset($_POST['submit'])){
                 $repass = validation($_POST["repass"]);
 
                 if (strlen($_POST["pass"]) < 6) {
-                    $errpass = "<span style = 'color:red'>*Your Password Must Contain At Least 6 Characters!</span>";
+                  $errpass = dispInpErrorMsg("Your Password Must Contain At Least 6 Characters");
+                   
                 }
                 /*
                 elseif(!preg_match("#[0-9]+#",$password)) {
@@ -62,27 +67,32 @@ if(isset($_POST['submit'])){
                 }*/
             }
             elseif(!empty($_POST["pass"])) {
-                $err_repass = "<span style = 'color:red'>*Please Check You've Entered Or Confirmed Your Password!</span>";
+              $err_repass = dispInpErrorMsg("Please Check You've Entered Or Confirmed Your Password");
+               
             } else {
-                 $errpass = "<span style = 'color:red'>*Please enter password </span> ";
+              $errpass = dispInpErrorMsg("Please enter password");
+                 
             }
 
            if(empty($_POST['address'])){
-             $erraddr = "<span style = 'color:red'>*Please enter address </span> ";
+            $erraddr = dispInpErrorMsg("Please enter address");
+             
            }
            else{
              $addr = validation($_POST["address"]);
            }
            
            if(empty($_POST['mobile'])){
-            $errmobile = "<span style = 'color:red'>*Please enter mobile no </span> ";
+            $errmobile = dispInpErrorMsg("Please enter mobile no");
+            
           }
           // else if(!filter_var($_POST['mobile'],FILTER_VALIDATE_INT)){
           //   $errmobile = "<span style = 'color:red'>*Please enter numeric digit </span> ";
           // }
           else{
               if(strlen($_POST['mobile']) < 10 || strlen($_POST['mobile']) > 13){
-                $errmobile = "<span style = 'color:red'>*Please enter 10 digit mobile no</span> ";
+                $errmobile = dispInpErrorMsg("Please enter 10 digit mobile no");
+                
               }
               else{
                 $mobile = validation($_POST["mobile"]);
@@ -91,14 +101,16 @@ if(isset($_POST['submit'])){
           }
 
           if(empty($_POST['datepicker'])){
-            $errdob = "<span style = 'color:red'>*Please enter date of birth </span> ";
+            $errdob = dispInpErrorMsg("Please enter date of birth");
+            
           }
           else{
             $dob = validation($_POST["datepicker"]);
           }
 
           if(empty($_POST['lang'])){
-            $errlang = "<span style = 'color:red'>*Please choose any one </span> ";
+            $errlang = dispInpErrorMsg("Please choose any one");
+            
           }
           else{
             $lang = $_POST["lang"];
@@ -108,11 +120,9 @@ if(isset($_POST['submit'])){
           $pass = md5($pass);
 
           $userData = array();
-            //var_dump($lang);
-        //  var_dump($gender);
-             if(!empty($fname) && !empty($lname) && !empty($email) && !empty($pass) &&!empty($repass) && !empty($addr) && !empty($mobile) && !empty($dob) && !empty($lang) && !empty($gender)){
 
-            //fname=$fname;&lname=$lname&email=$email&pass=$pass&addr=$addr&mobile=$mobile&dob=$dob&
+      if(!empty($fname) && !empty($lname) && !empty($email) && !empty($pass) &&!empty($repass) && !empty($addr) && !empty($mobile) && !empty($dob) && !empty($lang) && !empty($gender)){
+
             $flag = true;
             $userData = array(
                   "fname" => $fname,
@@ -311,8 +321,6 @@ if(isset($_POST['submit'])){
           <br/>
           <div class="form-group">
           <input type="submit" class="btn btn-primary btn-lg" value="Submit" name = "submit"/>
-         <!-- <button type="submit" class="btn btn-primary" onclick="formSubmit()">Submit</button>
-          <button type="submit" class="btn btn-secondary btn-lg" value="Clear" name="clear">Clear</button> -->
 
          <input type="reset" class="btn btn-secondary btn-lg" value="Clear" name = "clear"/> 
           

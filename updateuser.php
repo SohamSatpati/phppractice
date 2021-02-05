@@ -18,7 +18,7 @@ if(isset($_POST['back'])){
 if(isset($_POST['update'])){
 
   if(empty($_POST['name']) ){
-      $errfname = "<span style = 'color:red'>*Full Name is Required!</span>";
+    $errfname = dispInpErrorMsg("First Name is Required");
      
       }
       else {
@@ -26,10 +26,10 @@ if(isset($_POST['update'])){
       }
       
           if(empty($_POST['email'])){
-              $erremail = "<span style = 'color:red'>*Email is Required!</span>";
+            $erremail = dispInpErrorMsg("Email is Required");
              }
              else if(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
-              $erremail = "<span style = 'color:red'>*Invalid Email format!</span>"; 
+              $erremail = dispInpErrorMsg("Invalid Email format");
             } 
             else{
              $email = validation($_POST['email']); 
@@ -38,18 +38,18 @@ if(isset($_POST['update'])){
          
 
          if(empty($_POST['address'])){
-           $erraddr = "<span style = 'color:red'>*Please enter address </span> ";
+          $erraddr = dispInpErrorMsg("Please enter address");
          }
          else{
            $addr = validation($_POST["address"]);
          }
          
          if(empty($_POST['mobile'])){
-          $errmobile = "<span style = 'color:red'>*Please enter mobile no </span> ";
+          $errmobile = dispInpErrorMsg("Please enter mobile no");
         }
         else{
             if(strlen($_POST['mobile']) < 10 || strlen($_POST['mobile']) > 13){
-              $errmobile = "<span style = 'color:red'>*Please enter 10 digit mobile no</span> ";
+              $errmobile = dispInpErrorMsg("Please enter 10 digit mobile no");
             }
             else{
               $mobile = validation($_POST["mobile"]);
@@ -58,14 +58,14 @@ if(isset($_POST['update'])){
         }
 
         if(empty($_POST['datepicker'])){
-          $errdob = "<span style = 'color:red'>*Please enter date of birth </span> ";
+          $errdob = dispInpErrorMsg("Please enter date of birth");
         }
         else{
           $dob = validation($_POST["datepicker"]);
         }
         //print_r($_POST['lang']);
         if(!isset($_POST['lang']) || empty($_POST['lang'])){
-          $errlang = "<span style = 'color:red'>*Please choose any one </span> ";
+          $errlang = dispInpErrorMsg("Please choose any one");
           $lang = "";
         }
         else{
