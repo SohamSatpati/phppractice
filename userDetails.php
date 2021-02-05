@@ -38,7 +38,7 @@ $status = $flag1 = $flag2= false;
         // $query = "SELECT * FROM user LIMIT $start_from, $per_page_record";     
         // $rs_result = mysqli_query ($conn, $query); 
 
-$sql = "SELECT t.id,t.status, u.name, u.email, u.address, u.mobile, u.dob, u.lang, u.gender FROM temp_user t, user u WHERE t.id = u.user_id LIMIT $start_from, $per_page_record";
+$sql = "SELECT t.id,t.status, u.name, u.email, u.address, u.mobile, u.dob, u.lang, u.gender FROM temp_user t, user u WHERE t.id = u.user_id  ORDER BY t.id DESC LIMIT $start_from, $per_page_record";
 
 $result = $conn->query($sql);
 
