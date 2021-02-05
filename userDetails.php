@@ -1,23 +1,4 @@
-<style>
-.pagination {   
-    display: inline-block;   
-}   
-.pagination a {   
-    font-weight:bold;   
-    font-size:18px;   
-    color: black;   
-    float: left;   
-    padding: 8px 16px;   
-    text-decoration: none;   
-    border:1px solid black;   
-}   
-.pagination a.active {   
-        background-color: pink;   
-}   
-.pagination a:hover:not(.active) {   
-    background-color: skyblue;   
-}
-</style>
+
 <?php require_once "dbconn.php";
 include "./include/header.php";
 ?>
