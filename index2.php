@@ -2,6 +2,7 @@
 include "./include/header.php";
 require 'validation.php';
 
+$errfname = $errlname= $erremail = $errpass = $err_repass = $erraddr = $errmobile = $errgender = $errdob = $errlang = "";
 
 $fname = $mname = $lname = $email = $pass = $repass = $addr = $mobile = $dob = $gender =  $lang ="";
 
@@ -9,9 +10,25 @@ $flag = false;
 
 if(isset($_POST['submit'])){
 
+  if(empty($_POST['fname']) ){
+    $errfname = dispInpErrorMsg("First Name is Required");
+      }
+      else {
+          $fname = validation($_POST['fname']);
+      }
+
+  if(empty($_POST['lang'])){
+    echo "";
+    $errlang = dispInpErrorMsg("Please choose any one");
+    
+  }
+  else{
+    $lang = $_POST["lang"];
+  }
+
     $pass = md5($pass);
 
-          $userData = array();
+      $userData = array();
 
       if(!empty($fname) && !empty($lname) && !empty($email) && !empty($pass) &&!empty($repass) && !empty($addr) && !empty($mobile) && !empty($dob) && !empty($lang) && !empty($gender)){
 
@@ -45,34 +62,36 @@ if(isset($_POST['submit'])){
         <div class="row">
     <div class="col">
       
-      <input type="text" class="form-control" name = "fname" id = "fname" placeholder="First name" value = "<?php echo $fname;?>"><span id="fnameErrorMsg"></span>
+      <input type="text" class="form-control" name = "fname" id = "fname" placeholder="First name" value = "<?php echo $fname;?>"><?php echo $errfname;?>
+      <span id="fnameErrorMsg"></span>
     </div>
     <div class="col">
       <input type="text" class="form-control" name = "mname" placeholder="Middle name" value = "<?php echo $mname;?>">
     </div>
     <div class="col">
-    <input type="text" class="form-control" name = "lname" id="lname" placeholder="Last name" value = "<?php echo $lname;?>">
-    
+    <input type="text" class="form-control" name = "lname" id="lname" placeholder="Last name" value = "<?php echo $lname;?>"><span id="lnameErrorMsg"></span> 
     </div>
-        </div>
+  </div>
   </div>
           <div class="form-group">
             <label for="exampleFormControlInput1">Email address</label>
 
             <input type="text" class="form-control" id="email" placeholder="name@example.com" autocomplete="on" name="email" value = "<?php echo $email;?>">
-            
+            <span id="emailErrorMsg"></span> 
           </div>
 
           <div class="form-group">  
         <div class="row">
     <div class="col">
     <label for="exampleFormControlInput1">Password</label>
-      <input type="password" id = "pass" name = "pass" class="form-control" placeholder="Enter Password" value = "<?php?>">
+      <input type="password" id = "pass" name = "pass" class="form-control" placeholder="Enter Password" value = "">
+      <span id="passErrorMsg"></span>
     </div>
 
     <div class="col">
     <label for="exampleFormControlInput1">Retype password</label>
-      <input type="password" id = "repass" name = "repass" class="form-control" placeholder="Retype password" value = "<?php echo $repass;?>">
+      <input type="password" id = "repass" name = "repass" class="form-control" placeholder="Retype password" value = "">
+      <span id="repassErrorMsg"></span>
     </div>
     </div>
   </div> 
@@ -165,7 +184,7 @@ if(isset($_POST['submit'])){
           ?>
           </div>
     <div class="col-sm-3">
-    <label class="form-check-label" for="inlineCheckbox2"></label>
+    <label class="form-check-label" for="inlineCheckbox2"><?php echo $errlang;?></label>
     </div>
     </div>
   </div>
