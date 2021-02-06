@@ -1,27 +1,24 @@
 <?php
 require_once "dbconn.php";
 echo "welcome";
-$str_arr = unserialize(urldecode($_GET['str']));
-// echo "<pre>";
-// print_r($str_arr);
-// echo "</pre>";
-// echo "<br/>";
 
-$name = ucfirst($str_arr['fname'])." ".ucfirst($str_arr['mname'])." ".ucfirst($str_arr['lname']);
+
+$name = ucfirst($_POST['fname'])." ".ucfirst($_POST['mname'])." ".ucfirst($_POST['lname']);
 
 //echo $name. "<br/>";
-$email = $str_arr['email'];
+$email = $_POST['email'];
 //echo $email ."<br/>";
-$pass = $str_arr['pass'];
+$pass = $_POST['pass'];
+$pass = md5($pass);
 //echo $pass;
 
-$addr = $str_arr['addr'];
-$mobile = $str_arr['mobile'];
-$dob = $str_arr['dob'];
-$lang = $str_arr['lang'];
+$addr = $_POST['address'];
+$mobile = $_POST['mobile'];
+$dob = $_POST['datepicker'];
+$lang = $_POST['lang'];
 $lang = json_encode($lang);
 //$lang = base64_encode(serialize($lang));
-$gender = $str_arr['gender'];
+$gender = $_POST['MyRadio'];
 //var_dump($lang);
 //echo "Welcome  {$addr} {$mobile} {$dob} {$gender}";
 $status = 1;
