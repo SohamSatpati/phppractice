@@ -16,6 +16,7 @@ $(function (){
 
   var email_regex = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/;
 
+  
   /*
   Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
 
@@ -138,7 +139,7 @@ $(function (){
       $("#repassErrorMsg").html("*Password matched!").css("color", "green");
     }
     
-     error_pass = true;
+     error_repass = true;
    }
 
   function check_address(){
@@ -147,7 +148,10 @@ $(function (){
     if((addr == "" || addr == null)){
       $("#addressErrorMsg").html("*Address is required!").css("color", "red");
     }
-
+    
+    else if(addr.length < 3){
+      $("#addressErrorMsg").html("Minimum 3 characters required!").css("color", "red");
+    }
     else{
       $("#addressErrorMsg").html("*Address Accepted").css("color", "green");;
       
@@ -194,7 +198,8 @@ $(function (){
     var mobile = $("#mobile").val();
     var dob    = $("#datepicker").val();
 
-    if((fname == "" || fname == null) && (lname == "" || lname == null) &&(email == "" || email == null) && (pass == "" || pass == null) && (repass == "" || repass == null) && (addr == "" || addr == null) && (mobile == "" || mobile == null) &&(dob == "" || dob == null) ){
+
+    if((fname == "" || fname == null) && (lname == "" || lname == null) && (email == "" || email == null) && (pass == "" || pass == null) && (repass == "" || repass == null) && (addr == "" || addr == null) && (mobile == "" || mobile == null) &&(dob == "" || dob == null) ){
 
       $("#fnameErrorMsg").html("*First name required!").css("color", "red");
       $("#lnameErrorMsg").html("*Last name required!").css("color", "red");
@@ -204,15 +209,55 @@ $(function (){
       $("#addressErrorMsg").html("*Address is required!").css("color","red");
       $("#mobileErrorMsg").html("*Mobile number is required").css("color","red");
       $("#dobErrorMsg").html("*Dob is required").css("color","red");
-      // check_fname();
-      // $("#fname").focus();
+     
       return false;
+
     }
+
+    else if(fname == "" || fname == null){
+      $("#fnameErrorMsg").html("*First name required!").css("color", "red");
+      return false;
+     }
+  
+     else if(lname == "" || lname == null){
+      $("#lnameErrorMsg").html("*Last name required!").css("color", "red");
+      return false;
+     }
+
+     else if(email == "" || email == null){
+      $("#emailErrorMsg").html("*Email required!").css("color", "red");
+       return false;
+     }
+
+     else if(pass == "" || pass == null){
+
+      $("#passErrorMsg").html("*Password required!").css("color", "red");
+       return false;
+     }
+
+     else if(repass == "" || repass == null){
+
+      $("#repassErrorMsg").html("*Repassword required!").css("color","red");
+       return false;
+     }
+
+     else if(addr == "" || addr == null){
+      $("#addressErrorMsg").html("*Address is required!").css("color","red");
+       return false;
+     }
+
+     else if(mobile == "" || mobile == null){
+      $("#mobileErrorMsg").html("*Mobile number is required").css("color","red");
+       return false;
+     }
+
+     else if(dob == "" || dob == null){
+      $("#dobErrorMsg").html("*Dob is required").css("color","red");
+       return false;
+     }
     else{
-      console.log(fname);
-      console.log(pass);
-      console.log(mobile);
-      return true;
+      // $("#testErrorMsg").html("*required").css("color","red");
+       return true;
     }
 
     // else if(lname == "" || lname == null){

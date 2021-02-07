@@ -10,7 +10,16 @@ $flag = false;
 
 if(isset($_POST['submit'])){
 
-  echo "hello submit";
+  $fname  = validation($_POST['fname']);
+  $mname  = validation($_POST['mname']);
+  $lname  = validation($_POST['lname']);
+  $pass   = validation($_POST['pass']);
+  $email  = validation($_POST['email']); 
+  $addr   = validation($_POST["address"]);
+  $mobile = validation($_POST["mobile"]);
+  $dob    = validation($_POST["datepicker"]);
+
+  
 
   if(empty($_POST['lang'])){
     
@@ -21,46 +30,15 @@ if(isset($_POST['submit'])){
     $lang = $_POST["lang"];
   }
 
-  $fname  = validation($_POST['fname']);
-  $mname  = validation($_POST['mname']);
-  $lname  = validation($_POST['lname']);
-  $pass   = validation($_POST['pass']);
-  $email  = validation($_POST['email']); 
-  $addr   = validation($_POST["address"]);
-  $mobile = validation($_POST["mobile"]);
-  $dob    = validation($_POST["datepicker"]);
+  
   $gender = $_POST['MyRadio'];
 
-
-  if(!empty($fname) && !empty($lname) && !empty($email) && !empty($pass) &&!empty($repass) && !empty($addr) && !empty($mobile) && !empty($dob) && !empty($lang) && !empty($gender)){
-    header("Location:process_customer2.php");
-  }
- // $lang = $_POST["lang"];
-
-   // $userData = array();
-
-   
-
-//       if(!empty($fname) && !empty($lname) && !empty($email) && !empty($pass) &&!empty($repass) && !empty($addr) && !empty($mobile) && !empty($dob) && !empty($lang) && !empty($gender)){
-          
-//         echo "i am here";
-
-//             $flag = true;
-//             $userData = array(
-//                   "fname" => $fname,
-//                   "mname" => $mname,
-//                   "lname" => $lname,
-//                   "email" => $email,
-//                   "pass" => $pass,
-//                   "addr" => $addr,
-//                   "mobile" => $mobile,
-//                   "dob" => $dob,
-//                   "lang" => $lang,
-//                   "gender" => $gender
-//             );
-//            // header( "refresh:5;URL=process_customer.php?str=".urlencode(serialize($userData)) );  
-//              header("Location:process_customer.php?str=".urlencode(serialize($userData)));
-//              }
+  // if(!empty($fname) && !empty($lname) && !empty($email) && !empty($pass) &&!empty($repass) && !empty($addr) && !empty($mobile) && !empty($dob) && !empty($lang) && !empty($gender)){
+    
+  //   echo "hii";
+  //   header("Location:process_customer2.php");
+  // }
+ 
  }
 ?>
 
@@ -69,13 +47,13 @@ if(isset($_POST['submit'])){
 </section>
 <section class="maincontent">
 <div class="container">
-        <form method='post' id="form1" action = ""> 
+        <form method='post' id="form1" action = "process_customer2.php"> 
         <div class="form-group">
             <label for="exampleFormControlInput1">Name</label>
         <div class="row">
     <div class="col">
       
-      <input type="text" class="form-control" name = "fname" id = "fname" placeholder="First name" value = "<?php echo $fname;?>"><?php echo $errfname;?>
+      <input type="text" class="form-control" name = "fname" id = "fname" placeholder="First name" value = "<?php echo $fname = $fname ?: "";?>">
       <span id="fnameErrorMsg"></span>
     </div>
     <div class="col">
@@ -223,6 +201,7 @@ if(isset($_POST['submit'])){
                 <input class="form-check-input" type="radio" id="inlineRadio2" name="MyRadio" value="other">
                 <label class="form-check-label" for="inlineRadio2">Other</label>
               </div>
+              <span id="testErrorMsg"></span>
            </div>
            </div>
            
