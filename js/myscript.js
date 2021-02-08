@@ -16,7 +16,7 @@ $(function (){
 
   var email_regex = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/;
 
-  
+  var addr_regex = /^[a-zA-Z0-9_.-]*$/;
   /*
   Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
 
@@ -149,9 +149,10 @@ $(function (){
       $("#addressErrorMsg").html("*Address is required!").css("color", "red");
     }
     
-    else if(addr.length < 3){
+    else if((!addr.match(addr_regex)) || (addr.length < 3)){
       $("#addressErrorMsg").html("Minimum 3 characters required!").css("color", "red");
     }
+    
     else{
       $("#addressErrorMsg").html("*Address Accepted").css("color", "green");;
       

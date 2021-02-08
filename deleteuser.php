@@ -1,7 +1,7 @@
 <?php
 require_once "dbconn.php";
 echo "this is DELETE page <br/>";
-$id = $_GET['id'];
+$id = $conn->real_escape_string( $_GET['id']);
 $flag1 = $flag2 = false;
 
 $sql1 = "DELETE FROM user where id = '$id'";

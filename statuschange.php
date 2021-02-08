@@ -1,7 +1,7 @@
 <?php
 require_once "dbconn.php";
 echo "this is status change page <br/>";
-$id = $_GET['id'];
+$id = $conn->real_escape_string( $_GET['id']);
 $statuspassed = $_GET['status'];
 echo "id: ".$id."status:{$statuspassed}";
 // $flag1 = $flag2 = false;
