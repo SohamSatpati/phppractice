@@ -16,7 +16,7 @@ $(function (){
 
   var email_regex = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/;
 
-  var addr_regex = /^[a-zA-Z0-9_.-]*$/;
+  var addr_regex = /^(\w*\s*[\#\-\,\/\.\(\)\&]*)+$/;
   /*
   Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
 
