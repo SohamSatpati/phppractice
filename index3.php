@@ -43,7 +43,7 @@ if(isset($_POST['submit'])){
 
 <section class="maincontent">
 <div class="container">
-        <form method='post' id="form1" action = "process_customer2.php"> 
+        <form method='post' id="form1" action = ""> 
         <div class="form-group">
             <label for="exampleFormControlInput1">Name</label>
         <div class="row">
@@ -218,7 +218,7 @@ if(isset($_POST['submit'])){
   
 </section>
 <div id="divLoading">
- <div class="spinner-border"></div>
+ 
 </div>
 
 
@@ -242,9 +242,36 @@ if(isset($_POST['submit'])){
             width: 1.5em;
             height: 1.5em;
         }
-        #divLoading	{
+
+    #divLoading	{
+
 		display : none;
+    }
+
+    #divLoading.show{
+		display : block;
+		position : fixed;
+		z-index: 100;
+		background-image : url('https://media.giphy.com/media/6036p0cTnjUrNFpAlr/giphy.gif');
+		background-color:#E1E1E1;
+		opacity : 0.4;
+		background-repeat : no-repeat;
+		background-position : center;
+		left : 0;
+		bottom : 0;
+		right : 0;
+		top : 0;
 	}
+	#loadinggif.show {left : 50%;
+		top : 50%;
+		position : absolute;
+		z-index : 101;
+		width : 32px;
+		height : 32px;
+		margin-left : -16px;
+		margin-top : -16px;
+	}
+	
 </style>
 
 <script type="text/javascript">
@@ -453,7 +480,7 @@ function check_dob(){
   error_dob = true;
 }
 
-$(document).on("click","#add_submit",function(){
+$("#form1").on("click","#add_submit",function(){
 
   var fname  = $("#fname").val();
   var mname  = $("#mname").val();
@@ -528,13 +555,14 @@ $(document).on("click","#add_submit",function(){
     $("#dobErrorMsg").html("*Dob is required").css("color","red");
      return false;
    }
-  else{
 
+  else{
+     $("#divLoading").addClass('show');
     $.ajax({
         type: "POST",
         url: "./include/ajaxSubmission.php",
         //contentType: "application/json",
-        dataType: "json",
+        //dataType: "json",
         data: {
             fname: fname,
             mname: mname,
@@ -547,14 +575,14 @@ $(document).on("click","#add_submit",function(){
             gender: gender,
             lang: JSON.stringify(lang)
         },
-        beforeSend: function(){
-          $("#divLoading").show(); 
+
+        success: function(response){
+          $("#form1")[0].reset();
+          $("#divLoading").removeClass('show');
+          $("#add_submit").attr('disabled',false);
+         //alert(response);
         },
-        success: function(response) {
-            //console.log(response);
-            $("#divLoading").hide();
-            $("#form1").submit();
-        },
+        
         error: function(response) {
             console.log(response);
         }

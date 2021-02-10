@@ -34,7 +34,7 @@ body{
     border:1px solid black;   
 }   
 .pagination a.active {   
-        background-color: pink;   
+        background-color: #8080FF;   
 }   
 .pagination a:hover:not(.active) {   
     background-color: skyblue;   

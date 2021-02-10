@@ -1,15 +1,9 @@
 <?php
-require ('C:\xampp\htdocs\projects\phppractice\dbconn.php');
-/*
 sleep(3);
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
-*/
-
-
-//require_once "dbconn.php";
-echo "welcome";
+require ('C:\xampp\htdocs\projects\phppractice\dbconn.php');
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
 
 
 $name = ucfirst($_POST['fname'])." ".ucfirst($_POST['mname'])." ".ucfirst($_POST['lname']);
@@ -58,7 +52,9 @@ if ($conn->query($sql) === TRUE) {
   }
 
   if($flag1 == true && $flag2 == true){
-    header("Location: ..\phppractice\userDetails.php");//C:\xampp\htdocs\projects\phppractice\userDetails.php
+    echo "data inserted successfully";
+     // echo "<script>window.location.href = 'http://localhost/projects/phppractice/userDetails.php';</script>";
+    //header("Location: http://localhost/projects/phppractice/userDetails.php");
     
   }
   
