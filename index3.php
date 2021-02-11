@@ -497,7 +497,7 @@ $("#form1").on("click","#add_submit",function(){
 });
   var gender = $('input[name="MyRadio"]:checked').val();
 
-  
+  $(".form-control").html('');
   
   if((fname == "" || fname == null) && (lname == "" || lname == null) && (email == "" || email == null) && (pass == "" || pass == null) && (repass == "" || repass == null) && (addr == "" || addr == null) && (mobile == "" || mobile == null) && (dob == "" || dob == null) && (lang == "" || lang == null)){
 
@@ -578,6 +578,7 @@ $("#form1").on("click","#add_submit",function(){
 
         success: function(response){
           $("#form1")[0].reset();
+          $(".form-control").html('');
           $("#divLoading").removeClass('show');
           $("#add_submit").attr('disabled',false);
          //alert(response);
