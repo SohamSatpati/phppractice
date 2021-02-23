@@ -16,7 +16,7 @@ $addr = $_POST['address'];
 $mobile = $_POST['mobile'];
 $dob = $_POST['datepicker'];
 $lang = $_POST['lang'];
-$lang = json_encode($lang);
+//$lang = json_encode($lang);
 //$lang = base64_encode(serialize($lang));
 $gender = $_POST['MyRadio'];
 //var_dump($lang);
@@ -49,7 +49,7 @@ if ($conn->query($sql) === TRUE) {
   }
 
   if($flag1 == true && $flag2 == true){
-    header("Location:userDetails.php");
+    header("Location:userDetails2s.php");
   }
   
   $conn->close();

@@ -67,8 +67,10 @@ $result = $conn->query($sql);
         <td><?php echo $row["address"];?></td>
         <td><?php echo $row["mobile"];?></td>
         <td><?php echo $row["dob"];?></td>
+
         <td>
         <?php
+        $arr = $row["lang"];
         $arr = json_decode($row["lang"], TRUE);
         if (is_array($arr) || is_object($arr)){
         foreach($arr as $key=>$value){

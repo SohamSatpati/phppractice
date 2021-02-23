@@ -280,7 +280,8 @@ if(isset($_POST['submit'])){
         daysOfWeekHighlighted: "6,0",
         autoclose: true,
         todayHighlight: true,
-        endDate: "09-15-2017",
+        startDate: "01-01-1970",
+        endDate: "09-15-2003",
     });
     //$('#datepicker').datepicker("setDate", new Date());
 </script>
@@ -491,13 +492,15 @@ $("#form1").on("click","#add_submit",function(){
   var addr   = $("#address").val();
   var mobile = $("#mobile").val();
   var dob    = $("#datepicker").val();
+
   var lang = [];
   $('input[name="lang[]"]:checked').each(function(){
     lang.push($(this).val());
 });
+ lang = lang.toString();
   var gender = $('input[name="MyRadio"]:checked').val();
 
-  $(".form-control").html('');
+ // $(".form-control").html('');
   
   if((fname == "" || fname == null) && (lname == "" || lname == null) && (email == "" || email == null) && (pass == "" || pass == null) && (repass == "" || repass == null) && (addr == "" || addr == null) && (mobile == "" || mobile == null) && (dob == "" || dob == null) && (lang == "" || lang == null)){
 
@@ -573,15 +576,16 @@ $("#form1").on("click","#add_submit",function(){
             address: addr,
             dob: dob,
             gender: gender,
-            lang: JSON.stringify(lang)
+            lang: lang//JSON.stringify(lang)
         },
 
         success: function(response){
-          $("#form1")[0].reset();
-          $(".form-control").html('');
+          //$("#form1")[0].reset();
+         // $(".form-control").html('');
           $("#divLoading").removeClass('show');
           $("#add_submit").attr('disabled',false);
-         //alert(response);
+          window.location.replace('http://localhost/projects/phppractice/index3.php');
+          
         },
         
         error: function(response) {
