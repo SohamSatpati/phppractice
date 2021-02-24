@@ -389,8 +389,13 @@ function check_lname(){
 }
 
 function check_email(){
-  
-  var email = $("#email").val();
+
+   if(!$("#email").val().match(email_regex)){
+    $("#emailErrorMsg").html("Invalid Email Address!").css("color", "red");
+  }
+
+  else{
+    var email = $("#email").val();
   $.ajax({
    url: 'check_email.php',
    method: "POST",
@@ -398,18 +403,14 @@ function check_email(){
    success:function(data){
      if(data != '0'){
        $('#emailErrorMsg').html("Email not Available").css("color","red");
+       $('#add_submit').attr('disabled',true);
    }else{
     $('#emailErrorMsg').html("Email Available").css("color","green");
+    $('#add_submit').attr('disabled',false);
    }
   }
   });
-
-   if(!$("#email").val().match(email_regex)){
-    $("#emailErrorMsg").html("Invalid Email Address!").css("color", "red");
-  }
-
-  else{
-    $("#emailErrorMsg").html("*Email Accepted").css("color", "green");;
+    $("#emailErrorMsg").html("*Email Accepted").css("color", "green");
     
   }
   error_email = true;
