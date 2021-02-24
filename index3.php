@@ -389,6 +389,20 @@ function check_lname(){
 }
 
 function check_email(){
+  
+  var email = $("#email").val();
+  $.ajax({
+   url: 'check_email.php',
+   method: "POST",
+   data:{email:email},
+   success:function(data){
+     if(data != '0'){
+       $('#emailErrorMsg').html("Email not Available").css("color","red");
+   }else{
+    $('#emailErrorMsg').html("Email Available").css("color","green");
+   }
+  }
+  });
 
    if(!$("#email").val().match(email_regex)){
     $("#emailErrorMsg").html("Invalid Email Address!").css("color", "red");
